@@ -1,0 +1,20 @@
+html, * {
+    box-sizing: content-box;
+}
+.board {
+    position: absolute;
+    width: 480px
+}
+.piece {
+    height: 60px;
+    position: absolute;
+    z-index: 2;
+}
+
+input {
+    margin-top: 500px;
+    padding: .5em;
+    &:focus {
+        outline: none;
+    }
+}
