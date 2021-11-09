@@ -10,9 +10,18 @@ html, * {
     position: absolute;
     z-index: 2;
 }
-
+.game {
+    display: flex;
+    flex-direction: column;
+    h3 {
+        margin-left: 500px;
+        padding: .25em;
+    }
+}
+.chars {
+  letter-spacing: 23px;  
+}
 input {
-    margin-top: 500px;
     padding: .5em;
     &:focus {
         outline: none;

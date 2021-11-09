@@ -16,12 +16,14 @@ enum Piece {
     KingW,
 }
 interface State {
-    board: Piece[][]
+    board: Piece[][],
+    input: string
 }
 
 export default class Chess extends React.Component<null,State> {
     state = {
-        board: []
+        board: [],
+        input: ''
     }
     componentDidMount() {
         let board: Piece[][] = [];
@@ -91,22 +93,46 @@ export default class Chess extends React.Component<null,State> {
         }
         return res;
     }
+    move = () => {
+        let {input} = this.state;
+        let {board} = this.state;
+        let data = input.split('-');
+        console.log(data);
+        let startCol:number = Number(data[0].charCodeAt(0) - 97);
+        let startRow:number = 8 - Number(data[1]);
+        let destCol:number = Number(data[2].charCodeAt(0) - 97);
+        let destRow:number = 8-Number(data[3]);
+
+        let piece = board[startRow][startCol];
+        board[startRow][startCol] = Piece.None;
+        board[destRow][destCol] = piece;
+
+        this.setState({board});
+    }
+
     render() {
         const {board} = this.state;
         console.log(board);
         return (
             <div>
-                <img className="board" src="chessboard.svg"/>
-                {board.length !== 0&& board.map((row, rIndx) =>
-                    <div key={rIndx}>
-                        {row.map((piece, indx) =>
-                            <img className="piece" 
-                            style={{left: indx*60, top: rIndx*60}}
-                            src={this.getImageSrc(piece)}/> 
-                        )}
-                    </div>
-                )}
-                <input placeholder="move"/>
+                <div className="game">
+                    <img className="board" src="chessboard.svg"/>
+                    {board.length !== 0&& board.map((row, rIndx) =>
+                        <div key={rIndx}>
+                            {row.map((piece, indx) =>
+                                <img key={indx} className="piece" 
+                                style={{left: indx*60, top: rIndx*60}}
+                                src={this.getImageSrc(piece)}/> 
+                            )}
+                        </div>
+                    )}
+                    <h3>8</h3><h3>7</h3><h3>5</h3><h3>4</h3><h3>3</h3>
+                    <h3>2</h3><h3>1</h3>
+                </div>
+                <h3 className="chars">A B C D E F G H</h3>
+                <input onChange={(e) => this.setState({input: e.target.value})} 
+                placeholder="kolona-red-kolona-red"/>
+                <button onClick={() => this.move()}>move</button>
             </div>
         )
     }
