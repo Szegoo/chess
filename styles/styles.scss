@@ -1,9 +1,10 @@
-html, * {
+html,
+* {
     box-sizing: content-box;
 }
 .board {
     position: absolute;
-    width: 480px
+    width: 480px;
 }
 .piece {
     height: 60px;
@@ -15,14 +16,13 @@ html, * {
     flex-direction: column;
     h3 {
         margin-left: 500px;
-        padding: .25em;
     }
 }
 .chars {
-  letter-spacing: 23px;  
+    letter-spacing: 23px;
 }
 input {
-    padding: .5em;
+    padding: 0.5em;
     &:focus {
         outline: none;
     }

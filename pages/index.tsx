@@ -1,6 +1,7 @@
 import React from 'react';
+import checkPawnMove from '../components/pawn';
 
-enum Piece {
+export enum Piece {
     None,
     Pawn,
     Knight,
@@ -96,7 +97,9 @@ export default class Chess extends React.Component<null,State> {
     move = () => {
         let {input} = this.state;
         let {board} = this.state;
+
         let data = input.split('-');
+        
         console.log(data);
         let startCol:number = Number(data[0].charCodeAt(0) - 97);
         let startRow:number = 8 - Number(data[1]);
@@ -104,12 +107,28 @@ export default class Chess extends React.Component<null,State> {
         let destRow:number = 8-Number(data[3]);
 
         let piece = board[startRow][startCol];
+
+        const res = this.checkMove(input, piece);
+        if(!res) return;
+
         board[startRow][startCol] = Piece.None;
         board[destRow][destCol] = piece;
 
         this.setState({board});
     }
-
+    checkMove = (movement: string ,piece:Piece):boolean => {
+        let {board} = this.state;
+        let res;
+        switch(piece) {
+            case Piece.PawnW:
+                res = checkPawnMove(movement, false, board);
+                break;
+            case Piece.Pawn:
+                res = checkPawnMove(movement, true, board);
+                break;
+        }
+        return res;
+    }
     render() {
         const {board} = this.state;
         console.log(board);
@@ -126,7 +145,7 @@ export default class Chess extends React.Component<null,State> {
                             )}
                         </div>
                     )}
-                    <h3>8</h3><h3>7</h3><h3>5</h3><h3>4</h3><h3>3</h3>
+                    <h3>8</h3><h3>7</h3><h3>6</h3><h3>5</h3><h3>4</h3><h3>3</h3>
                     <h3>2</h3><h3>1</h3>
                 </div>
                 <h3 className="chars">A B C D E F G H</h3>
