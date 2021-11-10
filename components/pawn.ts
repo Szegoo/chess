@@ -1,4 +1,6 @@
 import {Piece} from '../pages/index';
+import {isSameColor} from './utils';
+
 export default function checkMove(move:string, isBlack: boolean, board: Piece[][]):boolean {
     let data = move.split("-");
 	let startCol:number = Number(data[0].charCodeAt(0) - 97);
@@ -57,16 +59,4 @@ function getPossibleMoves(currentCol:number,currentRow:number, isBlack: boolean,
         }
     }
     return moves;
-}
-
-function isSameColor(isBlack: boolean, piece:Piece): boolean {
-    let isWhite:boolean = false;
-    if(Number(piece) >  6) {
-        isWhite = true;
-    }
-
-    if(isBlack) {
-        return isWhite;
-    }
-    return !isWhite;
 }
