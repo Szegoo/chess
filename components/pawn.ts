@@ -33,10 +33,10 @@ function getPossibleMoves(currentCol:number,currentRow:number, isBlack: boolean,
         if(board[currentRow+1][currentCol] === Piece.None) {
             moves.push(`${currentCol}-${currentRow}-${currentCol}-${currentRow+1}`);
         }
-        if(board[currentRow+1][currentCol-1] !== Piece.None) {
+        if(board[currentRow+1][currentCol-1] !== Piece.None && isSameColor(true, board[currentRow+1][currentCol-1])) {
             moves.push(`${currentCol}-${currentRow}-${currentCol-1}-${currentRow+1}`);
         }
-        if(board[currentRow+1][currentCol+1] !== Piece.None) {
+        if(board[currentRow+1][currentCol+1] !== Piece.None && isSameColor(true, board[currentRow+1][currentCol+1])) {
             moves.push(`${currentCol}-${currentRow}-${currentCol+1}-${currentRow+1}`);
         }
     }else {
@@ -49,12 +49,24 @@ function getPossibleMoves(currentCol:number,currentRow:number, isBlack: boolean,
         if(board[currentRow-1][currentCol] === Piece.None) {
             moves.push(`${currentCol}-${currentRow}-${currentCol}-${currentRow-1}`);
         }
-        if(board[currentRow-1][currentCol-1] !== Piece.None) {
+        if(board[currentRow-1][currentCol-1] !== Piece.None && isSameColor(false, board[currentRow-1][currentCol-1])) {
             moves.push(`${currentCol}-${currentRow}-${currentCol-1}-${currentRow-1}`);
         }
-        if(board[currentRow-1][currentCol+1] !== Piece.None) {
+        if(board[currentRow-1][currentCol+1] !== Piece.None && isSameColor(false, board[currentRow-1][currentCol+1])) {
             moves.push(`${currentCol}-${currentRow}-${currentCol+1}-${currentRow-1}`);
         }
     }
     return moves;
+}
+
+function isSameColor(isBlack: boolean, piece:Piece): boolean {
+    let isWhite:boolean = false;
+    if(Number(piece) >  6) {
+        isWhite = true;
+    }
+
+    if(isBlack) {
+        return isWhite;
+    }
+    return !isWhite;
 }
