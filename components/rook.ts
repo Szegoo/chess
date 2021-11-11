@@ -42,7 +42,7 @@ function getPossibleMoves(currentCol:number,currentRow:number, isBlack: boolean,
         moves.push(`${currentCol}-${currentRow}-${i}-${currentRow}`);
     }
     for(let i = currentCol-1; i >= 0; i--) {
-        if(canMove(isBlack,board[currentRow][i])) {
+        if(!canMove(isBlack,board[currentRow][i])) {
             break;
         }
         moves.push(`${currentCol}-${currentRow}-${i}-${currentRow}`);
