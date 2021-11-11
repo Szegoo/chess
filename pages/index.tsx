@@ -23,13 +23,15 @@ export enum Piece {
 }
 interface State {
     board: Piece[][],
-    input: string
+    input: string,
+    white: boolean
 }
 
 export default class Chess extends React.Component<null,State> {
     state = {
         board: [],
-        input: ''
+        input: '',
+        white: true
     }
     componentDidMount() {
         let board: Piece[][] = [];
@@ -122,7 +124,12 @@ export default class Chess extends React.Component<null,State> {
         this.setState({board});
     }
     checkMove = (movement: string ,piece:Piece):boolean => {
-        let {board} = this.state;
+        let {board, white} = this.state;
+        if(Number(piece) > 6) {
+            if(!white) return;
+        }else {
+            if(white) return;
+        }
         let res = false;
         switch(piece) {
             case Piece.PawnW:
@@ -162,10 +169,11 @@ export default class Chess extends React.Component<null,State> {
                 res = checkKingMove(movement, false, board);
                 break;
         }
+        this.setState({white: !white});
         return res;
     }
     render() {
-        const {board} = this.state;
+        const {board, white} = this.state;
         console.log(board);
         return (
             <div>
@@ -186,6 +194,11 @@ export default class Chess extends React.Component<null,State> {
                 <h3 className="chars">A B C D E F G H</h3>
                 <input onChange={(e) => this.setState({input: e.target.value})} 
                 placeholder="kolona-red-kolona-red"/>
+                {white?
+                    <p>White's turn</p>
+                    :
+                    <p>Black's turn</p>
+                }
                 <button onClick={() => this.move()}>move</button>
             </div>
         )
