@@ -26,24 +26,28 @@ function getPossibleMoves(currentCol:number,currentRow:number, isBlack: boolean,
     console.log(currentCol);
 
     for(let i = currentCol+1; i < 8; i++) {
-        if(currentRow+(i-currentCol) < 8 && canMove(isBlack, board[currentRow+(i-currentCol)][i])) {
-            moves.push(`${currentCol}-${currentRow}-${i}-${currentRow+(i-currentCol)}`);
+        if(!(currentRow+(i-currentCol) < 8 && canMove(isBlack, board[currentRow+(i-currentCol)][i]))) {
+            break;
         }
+        moves.push(`${currentCol}-${currentRow}-${i}-${currentRow+(i-currentCol)}`);
     }
     for(let i = currentCol-1; i >= 0; i--) {
-        if(currentRow+(currentCol-i) < 8 && canMove(isBlack, board[currentRow+(currentCol-i)][i])) {
-            moves.push(`${currentCol}-${currentRow}-${i}-${currentRow+(currentCol - i)}`);
+        if(!(currentRow+(currentCol-i) < 8 && canMove(isBlack, board[currentRow+(currentCol-i)][i]))) {
+            break;
         }
+        moves.push(`${currentCol}-${currentRow}-${i}-${currentRow+(currentCol - i)}`);
     }
     for(let i = currentCol+1; i < 8; i++) {
-        if(currentRow-(i-currentCol) >= 0 && canMove(isBlack, board[currentRow-(i-currentCol)][i])) {
-            moves.push(`${currentCol}-${currentRow}-${i}-${currentRow-(i-currentCol)}`);
+        if(!(currentRow-(i-currentCol) >= 0 && canMove(isBlack, board[currentRow-(i-currentCol)][i]))) {
+            break;
         }
+        moves.push(`${currentCol}-${currentRow}-${i}-${currentRow-(i-currentCol)}`);
     }
     for(let i = currentCol-1; i >= 0; i--) {
-        if(currentRow-(currentCol-i) >= 0 && canMove(isBlack, board[currentRow-(currentCol-i)][i])) {
-            moves.push(`${currentCol}-${currentRow}-${i}-${currentRow-(currentCol - i)}`);
+        if(!(currentRow-(currentCol-i) >= 0 && canMove(isBlack, board[currentRow-(currentCol-i)][i]))) {
+            break;
         }
+        moves.push(`${currentCol}-${currentRow}-${i}-${currentRow-(currentCol - i)}`);
     }
 
     return moves;

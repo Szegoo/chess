@@ -24,9 +24,28 @@ export default function checkMove(move:string, isBlack: boolean, board: Piece[][
 function getPossibleMoves(currentCol:number,currentRow:number, isBlack: boolean, board: Piece[][]) {
     let moves = [];
     for(let i = currentRow+1; i < 8; i++) {
-        if(canMove(isBlack,board[i][currentCol])) {
-                        moves.push(`${currentCol}-${currentRow}-${i}-${currentRow-(currentCol - i)}`);
+        if(!canMove(isBlack,board[i][currentCol])) {
+            break;
         }
+        moves.push(`${currentCol}-${currentRow}-${currentCol}-${i}`);
+    }
+    for(let i = currentRow-1; i >= 0; i--) {
+        if(!canMove(isBlack,board[i][currentCol])) {
+            break;
+        }
+        moves.push(`${currentCol}-${currentRow}-${currentCol}-${i}`);
+    }
+    for(let i = currentCol+1; i < 8; i++) {
+        if(!canMove(isBlack,board[currentRow][i])) {
+            break;
+        }
+        moves.push(`${currentCol}-${currentRow}-${i}-${currentRow}`);
+    }
+    for(let i = currentCol-1; i >= 0; i--) {
+        if(canMove(isBlack,board[currentRow][i])) {
+            break;
+        }
+        moves.push(`${currentCol}-${currentRow}-${i}-${currentRow}`);
     }
 
     return moves;
