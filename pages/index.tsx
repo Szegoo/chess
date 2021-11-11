@@ -4,6 +4,7 @@ import checkKnightMove from '../components/knight';
 import checkBishopMove from '../components/bishop';
 import checkRookMove from '../components/rook';
 import checkQueenMove from '../components/queen';
+import checkKingMove from '../components/king';
 
 export enum Piece {
     None,
@@ -153,6 +154,12 @@ export default class Chess extends React.Component<null,State> {
                 break;
             case Piece.QueenW:
                 res = checkQueenMove(movement, false, board);
+                break;
+            case Piece.King:
+                res = checkKingMove(movement, true, board);
+                break;
+            case Piece.KingW:
+                res = checkKingMove(movement, false, board);
                 break;
         }
         return res;
