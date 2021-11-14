@@ -21,7 +21,7 @@ export default function checkMove(move:string, isBlack: boolean, board: Piece[][
     }
 }
 
-function getPossibleMoves(currentCol:number,currentRow:number, isBlack: boolean, board: Piece[][]) {
+export function getPossibleMoves(currentCol:number,currentRow:number, isBlack: boolean, board: Piece[][]) {
     let moves = [];
 
     for(let i = currentCol+1; i < 8; i++) {

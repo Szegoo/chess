@@ -23,7 +23,7 @@ export default function checkMove(move:string, isBlack: boolean, board: Piece[][
     return false;
 }
 
-function getPossibleMoves(currentCol:number,currentRow:number, isBlack: boolean, board: Piece[][]) {
+export function getPossibleMoves(currentCol:number,currentRow:number, isBlack: boolean, board: Piece[][]) {
     let moves = [];
     console.log(board);
     if(isBlack) {

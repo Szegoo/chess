@@ -1,7 +1,10 @@
 import {Piece} from '../pages/index';
 import {isSameColor} from './utils';
+import calculate from './calculator';
 
 export default function checkMove(move:string, isBlack: boolean, board: Piece[][]):boolean {
+    const check = calculate(board, isBlack);
+    if(check) return;
     let data = move.split("-");
 	let startCol:number = Number(data[0].charCodeAt(0) - 97);
     let startRow:number = 8 - Number(data[1]);
@@ -21,21 +24,7 @@ export default function checkMove(move:string, isBlack: boolean, board: Piece[][
     }
 }
 
-export function checkAllMoves(currentCol, currentRow, board: Piece[][], isBlack, kingCol, kingRow) {
-    const moves = getPossibleMoves(currentCol, currentRow, isBlack, board);
-
-    for(let i = 0; i < moves.length; i++) {
-        let data = moves[i].split("-");
-        let destCol = data[2];
-        let destRow = data[3];	
-        if(destCol === kingCol && destRow === kingRow) {
-            return true;
-        }
-    }
-    return false
-}
-
-function getPossibleMoves(currentCol:number,currentRow:number, isBlack: boolean, board: Piece[][]) {
+export function getPossibleMoves(currentCol:number,currentRow:number, isBlack: boolean, board: Piece[][]) {
     let moves = [];
     console.log(currentCol);
 

@@ -20,20 +20,7 @@ export default function checkMove(move:string, isBlack: boolean, board: Piece[][
         }
     }
 }
-export function checkAllMoves(currentCol, currentRow, board: Piece[][], isBlack, kingCol, kingRow) {
-    const moves = getPossibleMoves(currentCol, currentRow, isBlack, board);
-
-    for(let i = 0; i < moves.length; i++) {
-        let data = moves[i].split("-");
-        let destCol = data[2];
-        let destRow = data[3];	
-        if(destCol === kingCol && destRow === kingRow) {
-            return true;
-        }
-    }
-    return false
-}
-function getPossibleMoves(currentCol:number,currentRow:number, isBlack: boolean, board: Piece[][]) {
+export function getPossibleMoves(currentCol:number,currentRow:number, isBlack: boolean, board: Piece[][]) {
     let moves = [];
     if(currentRow + 2 <= 7 && currentCol -1 >= 0 && canMove(isBlack, board[currentRow+2][currentCol-1])) {
         moves.push(`${currentCol}-${currentRow}-${currentCol-1}-${currentRow+2}`);
